@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!--link leaflet-->>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+            crossorigin="" />
+        <!-- W3 CSS template -->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin="">
+        </script>
+    <style>
+        #mapid{
+            height: 600px;
+        }
+    </style>   
+<title>Tourist map of Paris</title>
+<h><b style="color:red;"> Paris Top 5 Attractions<b></h>
+  <p style="color:blue;"><strong><em> by Puttipong P.</em></strong></p>
+    </head>
+    <body style="background : url(Paris.jpg);  background-position: center;
+      background-repeat: no-repeat; background-size: cover;"> </body>
+        <div class="w3-row">
+            <div id="mapid" class="w3-half"></div>
+         <div id="content" class="w3-half">
+                <table class="w3-table w3-striped">
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Rate</th>
+                    </tr>
+                    <tr>
+                        <td>น้ำตก A</td>
+                        <td>ธรรมชาติ</td>
+                        <td>A</td>
+                    </tr>
+                </table>
+            </div>
+        </div>   
+
+     <!-- เรียกแผนที่ -->
+<script>
+// เรียกแผนที่
+var map = L.map("mapid").setView([48.85767586387936, 2.2905819463156982],11);
+// base map1
+var osm = L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png")
+.addTo(map);
+// based map
+var gsat = L.tileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}")
+.addTo(map);
+// group layers 1+2
+var baseMaps ={
+    //layername:Variables
+    OSM:osm,
+    GoogleSat:gsat, 
+};
+// add data
+var tourpoint = {
+type: "FeatureCollection",
+name: "tour_plk",
+crs: {
+type: "name",
+properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" },
+},
+features: [
+{
+type: "Feature",
+properties: {
+Name: "Eiffel Tower",
+Type: "Art",
+FID_1: 1358.0,
+level: "A",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[2.2945671405476924,48.858581819189965]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "Louvre Museum",
+Type: "History",
+FID_1: 1357.0,
+level: "A",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[2.337644008862575,48.86081575316366]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "Notre Dame Cathedral",
+Type: "History",
+FID_1: 1362.0,
+level: "B",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[2.32553995015630648,48.86826528150865]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "The Champs-Élysées",
+Type: "Shopping",
+FID_1: 1364.0,
+level: "A",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[2.29509527469302648,48.87401868136849]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "Palace of Versailles",
+Type: "History",
+FID_1: 1355.0,
+level: "A",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[2.1203768647904,48.80502738287832]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "Montmartre",
+Type: "Food",
+FID_1: 1365.0,
+level: "C",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[2.3432613028635703,48.88698181691913]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "The Île de la Cité Market",
+Type: "Shopping",
+FID_1: 733.0,
+level: "C",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[2.347620614969271,48.85528182244445]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "Ladurée",
+Type: "Food",
+FID_1: 1359.0,
+level: "B",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[2.3030337067032667,48.87099875536534]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "InterContinental Paris Le Grand",
+Type: "Hotel",
+FID_1: 603.0,
+level: "A",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[2.331413208017585,48.87086524026535]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "Jardin des Tuileries",
+Type: "Park",
+FID_1: 611.0,
+
+level: "B",
+},
+geometry: { type: "MultiPoint", coordinates: [[2.3274537136243647,48.863622156176525,]] },
+},
+{
+type: "Feature",
+properties: {
+Name: "",
+Type: "",
+FID_1: 1370.0,
+level: "",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[0,0]],
+},
+},
+],
+};
+
+//add marker and popup
+
+var tourLayer = L.geoJSON(tourpoint, {
+pointToLayer: function (feature, latlng) {
+return L.marker(latlng).bindPopup(feature.properties.Name);
+},
+onEachFeature: function (feature, layer) {
+layer.on("mouseover", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.add("w3-red");
+});
+
+
+
+layer.on("mouseout", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.remove("w3-red");
+});
+},
+}).addTo(map);
+///link table with popup and marker
+var cont = "";
+cont += "<table class='w3-table w3-striped'>";
+cont += "<tr>";
+cont += "<th>Location name</th>";
+cont += "<th>Type</th>";
+cont += "<th>Rating</th>";
+cont += "</tr>";
+for (let i in tourpoint.features) {
+cont += "<tr id=" + tourpoint.features[i].properties.FID_1 + ">";
+cont += "<td>" + tourpoint.features[i].properties.Name + "</td>";
+cont += "<td>" + tourpoint.features[i].properties.Type + "</td>";
+cont += "<td>" + tourpoint.features[i].properties.level + "</td>";
+cont += "</tr>";
+}
+cont += "</table>";
+console.log(cont);
+document.getElementById("content").innerHTML = cont;
+
+//create polygon
+var polygonGeoJson = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#f24a4a",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#ff80d7",
+        "fill-opacity": 0.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.4125289916992188,
+              48.86381134898791
+            ],
+            [
+              2.4139022827148438,
+              48.86968324077576
+            ],
+            [
+              2.4139022827148438,
+              48.87216729526863
+            ],
+            [
+              2.409439086914062,
+              48.877812415009195
+            ],
+            [
+              2.4053192138671875,
+              48.87984450217651
+            ],
+            [
+              2.3987960815429688,
+              48.88413419286922
+            ],
+            [
+              2.3970794677734375,
+              48.88910074349772
+            ],
+            [
+              2.393646240234375,
+              48.897678169122194
+            ],
+            [
+              2.390899658203125,
+              48.90038652411028
+            ],
+            [
+              2.3867797851562496,
+              48.90038652411028
+            ],
+            [
+              2.3802566528320312,
+              48.90038652411028
+            ],
+            [
+              2.3709869384765625,
+              48.90061221373512
+            ],
+            [
+              2.363433837890625,
+              48.90128927649513
+            ],
+            [
+              2.3558807373046875,
+              48.90128927649513
+            ],
+            [
+              2.3459243774414062,
+              48.90038652411028
+            ],
+            [
+              2.332878112792969,
+              48.90038652411028
+            ],
+            [
+              2.3242950439453125,
+              48.90083790234091
+            ],
+            [
+              2.3184585571289062,
+              48.899258060699516
+            ],
+            [
+              2.3105621337890625,
+              48.89632393659644
+            ],
+            [
+              2.3012924194335938,
+              48.89293819477081
+            ],
+            [
+              2.296829223632813,
+              48.89000369970676
+            ],
+            [
+              2.2909927368164062,
+              48.887746278609676
+            ],
+            [
+              2.2834396362304688,
+              48.88277959345126
+            ],
+            [
+              2.2806930541992188,
+              48.87871557505334
+            ],
+            [
+              2.2751998901367188,
+              48.87307055723444
+            ],
+            [
+              2.270050048828125,
+              48.868779917655615
+            ],
+            [
+              2.2652435302734375,
+              48.86403720372053
+            ],
+            [
+              2.2621536254882812,
+              48.85884228699205
+            ],
+            [
+              2.2580337524414062,
+              48.85703523304221
+            ],
+            [
+              2.252540588378906,
+              48.85409863123821
+            ],
+            [
+              2.2518539428710938,
+              48.85116185716921
+            ],
+            [
+              2.2542572021484375,
+              48.84799898474839
+            ],
+            [
+              2.2546005249023438,
+              48.844384028766356
+            ],
+            [
+              2.2532272338867188,
+              48.83963900301541
+            ],
+            [
+              2.2559738159179688,
+              48.83602344356167
+            ],
+            [
+              2.2621536254882812,
+              48.83511951292218
+            ],
+            [
+              2.2738265991210938,
+              48.83511951292218
+            ],
+            [
+              2.2793197631835933,
+              48.832633619561896
+            ],
+            [
+              2.2916793823242188,
+              48.82720942407081
+            ],
+            [
+              2.3006057739257812,
+              48.82607930943396
+            ],
+            [
+              2.318801879882812,
+              48.82155859602167
+            ],
+            [
+              2.33184814453125,
+              48.81861991362668
+            ],
+            [
+              2.3383712768554688,
+              48.81635927146624
+            ],
+            [
+              2.347984313964844,
+              48.81703747481909
+            ],
+            [
+              2.3558807373046875,
+              48.81635927146624
+            ],
+            [
+              2.3617172241210938,
+              48.81635927146624
+            ],
+            [
+              2.37030029296875,
+              48.81816779335053
+            ],
+            [
+              2.3802566528320312,
+              48.82246277132708
+            ],
+            [
+              2.3874664306640625,
+              48.826305334400246
+            ],
+            [
+              2.393646240234375,
+              48.82720942407081
+            ],
+            [
+              2.4063491821289062,
+              48.831729627757355
+            ],
+            [
+              2.4132156372070312,
+              48.83918707235521
+            ],
+            [
+              2.4149322509765625,
+              48.84912860497674
+            ],
+            [
+              2.4125289916992188,
+              48.86381134898791
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
+
+var polygonLayer = L.geoJSON(polygonGeoJson, {
+style: function (feature) {
+return {fillcolor:'pink',weight: 2,
+        opacity: 1,
+        color: 'red',  //Outline color
+        fillOpacity: 0.4 };
+},
+onEachFeature: function (feature, layer) {
+layer.bindPopup(feature.properties.name);
+layer.on("mouseover", function () {
+layer.openPopup();
+});
+layer.on("mouseout", function () {
+layer.closePopup();
+});
+},
+});
+
+//group point+polygon layer
+var overlay = {
+    Popular_Travel_Guide:tourLayer,
+    City_Of_Paris:polygonLayer
+};
+
+
+//Create layer control 
+L.control.layers(baseMaps,overlay).addTo(map);
+
+
+</script>
+
+
+    </body>
+</html>
